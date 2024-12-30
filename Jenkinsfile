@@ -9,7 +9,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git 'https://github.com/yourusername/ExpenseTracker.git'
+                git 'https://github.com/LXXPK/Expense_tracker.git'
             }
         }
         
