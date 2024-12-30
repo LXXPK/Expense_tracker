@@ -35,8 +35,9 @@ pipeline {
             steps {
                 script {
                    withCredentials([usernamePassword(credentialsId: 'dockerhub-credentials', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
-                        bat "docker login -u %DOCKER_USERNAME% -p %DOCKER_PASSWORD%"
-                        bat "docker push %DOCKER_USERNAME%/${DOCKER_IMAGE}:latest"
+                        bat 'docker login -u %DOCKER_USERNAME% -p %DOCKER_PASSWORD%'
+                        bat 'docker tag expense-tracker:latest %DOCKER_USERNAME%/expense-tracker:latest'  // Tag the image
+                        bat 'docker push %DOCKER_USERNAME%/expense-tracker:latest'  // Push the tagged image
                     }
                 }
             }
