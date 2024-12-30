@@ -1,27 +1,23 @@
-# Use an official Python runtime as a parent image
-FROM python:3.9-slim
+# Use the official Python image from Docker Hub
+FROM python:3.10-slim
 
-# Set the working directory in the container
+# Set the working directory inside the container
 WORKDIR /app
 
-# Copy the current directory contents into the container at /app
-COPY . /app/
+# Copy the requirements.txt file into the container
+COPY requirements.txt /app/
 
-# Install system dependencies (example for PostgreSQL support)
-RUN apt-get update && apt-get install -y \
-    libpq-dev \
-    build-essential \
-    && rm -rf /var/lib/apt/lists/*
-
-# Install dependencies
+# Install the dependencies
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Expose the port the app runs on
+# Copy the entire application code into the container
+COPY . /app/
+
+# Expose the port that Django will run on
 EXPOSE 8000
 
-# Set environment variables for Django (e.g., disabling the debug mode for production)
+# Set environment variables for Django (optional, adjust for your environment)
 ENV PYTHONUNBUFFERED=1
-ENV DJANGO_SETTINGS_MODULE=ExpenseTracker.settings
 
-# Run the Django application (you can use `python manage.py runserver` for development)
+# Run the Django development server (adjust for production if needed)
 CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
