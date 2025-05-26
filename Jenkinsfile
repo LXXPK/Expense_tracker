@@ -2,8 +2,8 @@ pipeline {
     agent any
     
     environment {
-        PYTHON = 'C:\\Python310\\python.exe'   // Adjust this path based on your installation
-    PIP = 'C:\\Python310\\Scripts\\pip.exe'
+        PYTHON = 'C:\\Python312\\python.exe'   // Adjust this path based on your installation
+    PIP = 'C:\\Python312\\Scripts\\pip.exe'
     }
     
     stages {
